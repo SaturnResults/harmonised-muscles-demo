@@ -232,18 +232,20 @@ p{margin:0}
 .faq a{color:var(--green);font-weight:600}
 .qa{border-bottom:1px solid var(--line)}
 .qa:first-of-type{border-top:1px solid var(--line)}
-.qh{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;padding:22px 0;cursor:pointer;text-align:left;font:400 22px/1.25 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+.qa summary{display:block;list-style:none;cursor:pointer;padding:22px 0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::marker{content:""}
+.qa summary:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-radius:6px}
+.qrow{display:flex;justify-content:space-between;align-items:center;gap:24px;font:400 22px/1.25 var(--serif);letter-spacing:-.01em;color:var(--ink)}
 .qi{flex:none;width:38px;height:38px;border-radius:50%;background:#fff;position:relative;transition:background .3s,box-shadow .3s}
 .qi::before,.qi::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:2px;border-radius:2px;background:var(--ink);transform:translate(-50%,-50%);transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s}
 .qi::after{transform:translate(-50%,-50%) rotate(90deg)}
-.qh:hover .qi{box-shadow:0 0 0 1px rgba(32,157,80,.35)}
-.qa.open .qi{background:var(--green)}
-.qa.open .qi::before,.qa.open .qi::after{background:#fff}
-.qa.open .qi::after{transform:translate(-50%,-50%) rotate(0deg)}
-.qb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1)}
-.qa.open .qb{grid-template-rows:1fr}
-.qb>div{overflow:hidden;visibility:hidden;transition:visibility 0s .4s}
-.qa.open .qb>div{visibility:visible;transition-delay:0s}
+.qa summary:hover .qi{box-shadow:0 0 0 1px rgba(32,157,80,.35)}
+.qa[open]:not(.closing) .qi{background:var(--green)}
+.qa[open]:not(.closing) .qi::before,.qa[open]:not(.closing) .qi::after{background:#fff}
+.qa[open]:not(.closing) .qi::after{transform:translate(-50%,-50%) rotate(0deg)}
+.qb{overflow:hidden}
+.qb.anim{transition:height .38s cubic-bezier(.2,.8,.2,1)}
 .qb p{color:var(--mute);max-width:78ch;padding:0 62px 24px 0}
 .map{height:400px;margin-top:28px;background:var(--beige)}
 .map iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.85)}
@@ -269,7 +271,8 @@ footer .logo small{color:var(--green-d)}
   .rev{padding:36px 18px 28px}
   .track{grid-auto-columns:88%}
   .faq{padding:36px 20px}
-  .qh{font-size:19px;padding:18px 0;gap:16px}
+  .qa summary{padding:18px 0}
+  .qrow{font-size:19px;gap:16px}
   .qi{width:34px;height:34px}
   .qb p{padding-right:0}
   .fgrid{grid-template-columns:1fr}
@@ -461,13 +464,13 @@ footer .logo small{color:var(--green-d)}
   <div class="wrap">
     <div class="faq">
       <h2>Booking FAQ</h2>
-      <div class="qa open"><button class="qh" type="button" aria-expanded="true">Do I pay when I book?<i class="qi"></i></button><div class="qb"><div><p>No. There's no account and no card needed to book. You pay at the clinic after your session, by card or cash.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">Which treatment should I book?<i class="qi"></i></button><div class="qb"><div><p>For a specific injury or tight, knotted muscles, Deep Tissue is a good start. For long-standing pain, sciatica-type symptoms or headaches, Myofascial Release often helps. If you're not sure, book either one. Eoin talks through your symptoms first and adjusts the session to suit.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">Can I move or cancel my appointment?<i class="qi"></i></button><div class="qb"><div><p>Yes. Call or text Eoin on 07944 493172 at least 24 hours before your appointment and he'll move or cancel it for free.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">How do packages work?<i class="qi"></i></button><div class="qb"><div><p>Choose a 3, 6 or 10 session package and book your first session now. Sessions can be used for deep tissue or myofascial release, and packages are valid for 4, 8 or 12 months. They also make a great gift.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">Can I book a longer session?<i class="qi"></i></button><div class="qb"><div><p>Yes. Sessions are usually 60 minutes, and 90 or 120-minute sessions are available on request. Add a note in the last step of your booking and Eoin will arrange it.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">Is deep tissue massage painful?<i class="qi"></i></button><div class="qb"><div><p>It can feel more intense than a relaxing massage, but it should never be unbearable. Eoin always works within your pain threshold and adjusts the pressure as he goes.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">Where is the clinic?<i class="qi"></i></button><div class="qb"><div><p>135 Dulwich Road, London SE24 0NG, in Herne Hill. Herne Hill station is a two-minute walk, with buses and free and paid parking nearby. The clinic is wheelchair accessible.</p></div></div></div>
+      <details class="qa" open><summary><span class="qrow"><span>Do I pay when I book?</span><i class="qi"></i></span></summary><div class="qb"><p>No. There's no account and no card needed to book. You pay at the clinic after your session, by card or cash.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>Which treatment should I book?</span><i class="qi"></i></span></summary><div class="qb"><p>For a specific injury or tight, knotted muscles, Deep Tissue is a good start. For long-standing pain, sciatica-type symptoms or headaches, Myofascial Release often helps. If you're not sure, book either one. Eoin talks through your symptoms first and adjusts the session to suit.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>Can I move or cancel my appointment?</span><i class="qi"></i></span></summary><div class="qb"><p>Yes. Call or text Eoin on 07944 493172 at least 24 hours before your appointment and he'll move or cancel it for free.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>How do packages work?</span><i class="qi"></i></span></summary><div class="qb"><p>Choose a 3, 6 or 10 session package and book your first session now. Sessions can be used for deep tissue or myofascial release, and packages are valid for 4, 8 or 12 months. They also make a great gift.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>Can I book a longer session?</span><i class="qi"></i></span></summary><div class="qb"><p>Yes. Sessions are usually 60 minutes, and 90 or 120-minute sessions are available on request. Add a note in the last step of your booking and Eoin will arrange it.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>Is deep tissue massage painful?</span><i class="qi"></i></span></summary><div class="qb"><p>It can feel more intense than a relaxing massage, but it should never be unbearable. Eoin always works within your pain threshold and adjusts the pressure as he goes.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>Where is the clinic?</span><i class="qi"></i></span></summary><div class="qb"><p>135 Dulwich Road, London SE24 0NG, in Herne Hill. Herne Hill station is a two-minute walk, with buses and free and paid parking nearby. The clinic is wheelchair accessible.</p></div></details>
     </div>
   </div>
 </section>
@@ -739,9 +742,24 @@ footer .logo small{color:var(--green-d)}
   var auto=setInterval(function(){var n=pages(),i=Math.round(track.scrollLeft/track.clientWidth);track.scrollTo({left:((i+1)%n)*track.clientWidth,behavior:'smooth'})},6000);
   track.addEventListener('pointerdown',function(){clearInterval(auto)});
 
-  // FAQ accordion
-  document.querySelectorAll('.qa .qh').forEach(function(b){
-    b.addEventListener('click',function(){var o=b.parentElement.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+  // FAQ: native <details> opens and closes on every phone; this only adds the smooth slide
+  document.querySelectorAll('details.qa').forEach(function(d){
+    var s=d.querySelector('summary'),b=d.querySelector('.qb');
+    s.addEventListener('click',function(e){
+      e.preventDefault();
+      if(d.getAttribute('data-busy'))return;
+      d.setAttribute('data-busy','1');
+      function done(){b.classList.remove('anim');b.style.height='';d.classList.remove('closing');d.removeAttribute('data-busy')}
+      if(d.open){
+        b.style.height=b.scrollHeight+'px';b.offsetHeight;
+        d.classList.add('closing');b.classList.add('anim');b.style.height='0px';
+        setTimeout(function(){d.open=false;done()},400);
+      }else{
+        d.open=true;var h=b.scrollHeight;b.style.height='0px';b.offsetHeight;
+        b.classList.add('anim');b.style.height=h+'px';
+        setTimeout(done,400);
+      }
+    });
   });
   $('yr').textContent=new Date().getFullYear();
 

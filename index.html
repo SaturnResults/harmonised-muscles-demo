@@ -240,21 +240,23 @@ section{scroll-margin-top:96px}
 .faq{border-radius:var(--r-xl);padding:56px 64px;background:linear-gradient(100deg,#f7f6f2 0%,#f3f7ee 60%,#e7f2e2 100%)}
 .faq h2{text-align:center;margin-bottom:34px}
 .faq a{color:var(--green);font-weight:600}
-/* accordion: answers slide open and closed */
+/* FAQ: native details/summary, with a JS slide on top */
 .qa{border-bottom:1px solid var(--line)}
 .qa:first-of-type{border-top:1px solid var(--line)}
-.qh{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;background:none;border:0;padding:22px 0;cursor:pointer;text-align:left;font:400 22px/1.25 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+.qa summary{display:block;list-style:none;cursor:pointer;padding:22px 0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::marker{content:""}
+.qa summary:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-radius:6px}
+.qrow{display:flex;justify-content:space-between;align-items:center;gap:24px;font:400 22px/1.25 var(--serif);letter-spacing:-.01em;color:var(--ink)}
 .qi{flex:none;width:38px;height:38px;border-radius:50%;background:#fff;position:relative;transition:background .3s,box-shadow .3s}
 .qi::before,.qi::after{content:"";position:absolute;left:50%;top:50%;width:13px;height:2px;border-radius:2px;background:var(--ink);transform:translate(-50%,-50%);transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s}
 .qi::after{transform:translate(-50%,-50%) rotate(90deg)}
-.qh:hover .qi{box-shadow:0 0 0 1px rgba(32,157,80,.35)}
-.qa.open .qi{background:var(--green)}
-.qa.open .qi::before,.qa.open .qi::after{background:#fff}
-.qa.open .qi::after{transform:translate(-50%,-50%) rotate(0deg)}
-.qb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1)}
-.qa.open .qb{grid-template-rows:1fr}
-.qb>div{overflow:hidden;visibility:hidden;transition:visibility 0s .4s}
-.qa.open .qb>div{visibility:visible;transition-delay:0s}
+.qa summary:hover .qi{box-shadow:0 0 0 1px rgba(32,157,80,.35)}
+.qa[open]:not(.closing) .qi{background:var(--green)}
+.qa[open]:not(.closing) .qi::before,.qa[open]:not(.closing) .qi::after{background:#fff}
+.qa[open]:not(.closing) .qi::after{transform:translate(-50%,-50%) rotate(0deg)}
+.qb{overflow:hidden}
+.qb.anim{transition:height .38s cubic-bezier(.2,.8,.2,1)}
 .qb p{color:var(--mute);max-width:78ch;padding:0 62px 24px 0}
 
 /* map + footer */
@@ -325,7 +327,8 @@ footer{background:linear-gradient(180deg,rgba(32,157,80,.38) 0%,var(--sage) 100%
   .req .side{min-height:440px}
   .glass .cols{grid-template-columns:1fr}
   .faq{padding:36px 20px}
-  .qh{font-size:19px;padding:18px 0;gap:16px}
+  .qa summary{padding:18px 0}
+  .qrow{font-size:19px;gap:16px}
   .qi{width:34px;height:34px}
   .qb p{padding-right:0}
   .fgrid{grid-template-columns:1fr}
@@ -591,13 +594,13 @@ footer{background:linear-gradient(180deg,rgba(32,157,80,.38) 0%,var(--sage) 100%
   <div class="wrap">
     <div class="faq rv">
       <h2>FAQ</h2>
-      <div class="qa open"><button class="qh" type="button" aria-expanded="true">Where is Harmonised Muscles?<i class="qi"></i></button><div class="qb"><div><p>Harmonised Muscles is at 135 Dulwich Road, London SE24 0NG, in Herne Hill. Herne Hill station is a two-minute walk, with buses and free and paid parking nearby. It's easy to reach from Brixton, Dulwich, East Dulwich, Camberwell, Tulse Hill and Clapham.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">What treatments does Harmonised Muscles offer?<i class="qi"></i></button><div class="qb"><div><p>Eoin offers deep tissue massage, myofascial release therapy and sports massage. Sessions can combine techniques, including trigger point therapy, assisted stretching and CranioSacral techniques, and every treatment comes with mobility advice and exercises to do at home.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">How much does a session cost?<i class="qi"></i></button><div class="qb"><div><p>A 60-minute session is £85. Packages save you money: 3 sessions for £225, 6 sessions for £425 and 10 sessions for £680, usable for either deep tissue or myofascial release. 90 and 120-minute sessions are available on request.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">Do I need a referral?<i class="qi"></i></button><div class="qb"><div><p>No. You can book directly <a href="booking.html">online</a> or by calling 07944 493172. If you're not sure which treatment is right, book either one and Eoin will talk through your symptoms before he starts.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">What conditions do you treat?<i class="qi"></i></button><div class="qb"><div><p>Neck and shoulder tension, lower back pain, sciatica-type symptoms, tension headaches, hip and glute pain, hamstring and knee problems, frozen shoulder, poor posture, sports injuries and recovery after exercise or surgery.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">Is deep tissue massage painful?<i class="qi"></i></button><div class="qb"><div><p>It can feel more intense than a relaxing massage, but it should never be unbearable. Eoin always works within your pain threshold and adjusts the pressure as he goes.</p></div></div></div>
-      <div class="qa"><button class="qh" type="button" aria-expanded="false">How quickly can I get an appointment?<i class="qi"></i></button><div class="qb"><div><p>The clinic is open seven days a week, including weekday evenings and weekend afternoons, so there's usually a slot within a few days. The <a href="booking.html">booking page</a> shows the next free appointment.</p></div></div></div>
+      <details class="qa" open><summary><span class="qrow"><span>Where is Harmonised Muscles?</span><i class="qi"></i></span></summary><div class="qb"><p>Harmonised Muscles is at 135 Dulwich Road, London SE24 0NG, in Herne Hill. Herne Hill station is a two-minute walk, with buses and free and paid parking nearby. It's easy to reach from Brixton, Dulwich, East Dulwich, Camberwell, Tulse Hill and Clapham.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>What treatments does Harmonised Muscles offer?</span><i class="qi"></i></span></summary><div class="qb"><p>Eoin offers deep tissue massage, myofascial release therapy and sports massage. Sessions can combine techniques, including trigger point therapy, assisted stretching and CranioSacral techniques, and every treatment comes with mobility advice and exercises to do at home.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>How much does a session cost?</span><i class="qi"></i></span></summary><div class="qb"><p>A 60-minute session is £85. Packages save you money: 3 sessions for £225, 6 sessions for £425 and 10 sessions for £680, usable for either deep tissue or myofascial release. 90 and 120-minute sessions are available on request.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>Do I need a referral?</span><i class="qi"></i></span></summary><div class="qb"><p>No. You can book directly <a href="booking.html">online</a> or by calling 07944 493172. If you're not sure which treatment is right, book either one and Eoin will talk through your symptoms before he starts.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>What conditions do you treat?</span><i class="qi"></i></span></summary><div class="qb"><p>Neck and shoulder tension, lower back pain, sciatica-type symptoms, tension headaches, hip and glute pain, hamstring and knee problems, frozen shoulder, poor posture, sports injuries and recovery after exercise or surgery.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>Is deep tissue massage painful?</span><i class="qi"></i></span></summary><div class="qb"><p>It can feel more intense than a relaxing massage, but it should never be unbearable. Eoin always works within your pain threshold and adjusts the pressure as he goes.</p></div></details>
+      <details class="qa"><summary><span class="qrow"><span>How quickly can I get an appointment?</span><i class="qi"></i></span></summary><div class="qb"><p>The clinic is open seven days a week, including weekday evenings and weekend afternoons, so there's usually a slot within a few days. The <a href="booking.html">booking page</a> shows the next free appointment.</p></div></details>
     </div>
   </div>
 </section>
@@ -736,9 +739,24 @@ document.documentElement.classList.add('js');
   var auto=setInterval(function(){var n=pages(),i=Math.round(track.scrollLeft/track.clientWidth);track.scrollTo({left:((i+1)%n)*track.clientWidth,behavior:'smooth'})},6000);
   track.addEventListener('pointerdown',function(){clearInterval(auto)});
 
-  // FAQ accordion
-  document.querySelectorAll('.qa .qh').forEach(function(b){
-    b.addEventListener('click',function(){var o=b.parentElement.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+  // FAQ: native <details> opens and closes on every phone; this only adds the smooth slide
+  document.querySelectorAll('details.qa').forEach(function(d){
+    var s=d.querySelector('summary'),b=d.querySelector('.qb');
+    s.addEventListener('click',function(e){
+      e.preventDefault();
+      if(d.getAttribute('data-busy'))return;
+      d.setAttribute('data-busy','1');
+      function done(){b.classList.remove('anim');b.style.height='';d.classList.remove('closing');d.removeAttribute('data-busy')}
+      if(d.open){
+        b.style.height=b.scrollHeight+'px';b.offsetHeight;
+        d.classList.add('closing');b.classList.add('anim');b.style.height='0px';
+        setTimeout(function(){d.open=false;done()},400);
+      }else{
+        d.open=true;var h=b.scrollHeight;b.style.height='0px';b.offsetHeight;
+        b.classList.add('anim');b.style.height=h+'px';
+        setTimeout(done,400);
+      }
+    });
   });
 
   // appointment request (demo)
