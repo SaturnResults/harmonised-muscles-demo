@@ -183,7 +183,6 @@ p{margin:0}
 .trust svg{width:14px;height:14px;stroke:var(--green);flex:none}
 
 /* mobile bar */
-.mbar{display:none}
 
 /* confirmation */
 .done-view{padding-block:40px 90px;display:none}
@@ -280,12 +279,6 @@ footer .logo small{color:var(--green-d)}
 @media (max-width:980px){
   .main{grid-template-columns:1fr}
   .sum{position:static}
-  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));align-items:center;gap:14px}
-  .mbar .p{flex:1;min-width:0}
-  .mbar .p b{font:400 24px/1 var(--serif)}
-  .mbar .p span{display:block;font-size:12px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .mbar .pill{padding:15px 22px}
-  body.booking{padding-bottom:84px}
 }
 @media (max-width:760px){
   .band-in{grid-template-columns:1fr;padding:28px 20px;gap:24px}
@@ -511,10 +504,6 @@ footer .logo small{color:var(--green-d)}
   </div>
 </footer>
 
-<div class="mbar" id="mbar">
-  <div class="p"><b id="mPrice">£85</b><span id="mSub">Pick what you need</span></div>
-  <button class="pill pill-green wait" id="mConfirm" type="button">Confirm booking</button>
-</div>
 
 <script>
 (function(){
@@ -673,10 +662,9 @@ footer .logo small{color:var(--green-d)}
     setV('treatment',t?t.name+' · '+t.dur+' · £'+t.price:null,t?t.name:null);
     setV('when',S.when?whenLabel(S.when,true):null,S.when?whenLabel(S.when):null);
     var price=t?'£'+t.price:'£85',sub=t?(t.pack?t.dur.split(' ')[0]+' sessions':t.dur)+' · pay at the clinic':'60 min · pay at the clinic';
-    $('sumPrice').textContent=price;$('sumSub').textContent=sub;$('mPrice').textContent=price;
-    $('mSub').textContent=S.when?whenLabel(S.when):t?t.name:c?c[1]:'Pick what you need';
+    $('sumPrice').textContent=price;$('sumSub').textContent=sub;
     var ready=c&&t&&S.when;
-    $('confirm').classList.toggle('wait',!ready);$('mConfirm').classList.toggle('wait',!ready);
+    $('confirm').classList.toggle('wait',!ready);
     $('msg').textContent='';
     if(scroll){var el=$('s-'+active),r=el.getBoundingClientRect();if(r.top<70||r.top>innerHeight*.6)el.scrollIntoView({behavior:'smooth',block:'start'});if(active==='details'&&!$('f-name').value)setTimeout(function(){$('f-name').focus({preventScroll:true})},350)}
   }
@@ -704,10 +692,10 @@ footer .logo small{color:var(--green-d)}
     $('cRef').textContent='Ref HM-'+String(S.when.getTime()).slice(-6,-2);
     $('cTx').textContent=t.name+' · '+t.dur;
     $('cPrice').textContent='£'+t.price+' · pay at the clinic';
-    $('flow').hidden=true;$('mbar').style.display='none';document.body.classList.remove('booking');
+    $('flow').hidden=true;
     $('doneView').classList.add('show');scrollTo({top:0,behavior:'smooth'});
   }
-  $('confirm').onclick=confirm;$('mConfirm').onclick=confirm;
+  $('confirm').onclick=confirm;
   [$('f-name'),$('f-mobile')].forEach(function(i){i.addEventListener('input',function(){i.classList.remove('bad');$('msg').textContent=''})});
 
   // calendar file
